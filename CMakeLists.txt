@@ -21,18 +21,24 @@
 # gr-lora specific options
 ########################################################################
 option(HAS_MONGODB "Support for storing data to MongoDB" OFF)
-option(GRLORA_DEBUG "Print debug output" OFF)
+option(GRLORA_DEBUG "Print debug output" ON)
+option(RADIUM_DEBUG "print customer debug log" ON)
 
 if(GRLORA_DEBUG)
     message("-- Enabling debug mode")
     add_definitions(-DGRLORA_DEBUG)
 endif(GRLORA_DEBUG)
 
+if(RADIUM_DEBUG)
+    message("-- Enabling my debug log")
+    add_definitions("-DRADIUM_DEBUG")
+endif(RADIUM_DEBUG)
+
 ########################################################################
 # Project setup
 ########################################################################
 cmake_minimum_required(VERSION 3.8)
-project(gr-lora CXX C)
+project(gr-lora-parallel CXX C)
 enable_testing()
 
 # Install to PyBOMBS target prefix if defined

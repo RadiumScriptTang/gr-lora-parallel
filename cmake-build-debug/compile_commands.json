@@ -1,0 +1,47 @@
+[
+{
+  "directory": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/lib",
+  "command": "/usr/bin/c++ -DFFTW3F_THREADS -DGRLORA_DEBUG -DGR_CTRLPORT -DRADIUM_DEBUG -Dgnuradio_lora_EXPORTS -I/home/radium/Desktop/lora/gr-lora-parallel/lib/../include -g -fPIC   -fvisibility=hidden -Wall -Wextra -std=gnu++11 -o CMakeFiles/gnuradio-lora.dir/decoder_impl.cc.o -c /home/radium/Desktop/lora/gr-lora-parallel/lib/decoder_impl.cc",
+  "file": "/home/radium/Desktop/lora/gr-lora-parallel/lib/decoder_impl.cc"
+},
+{
+  "directory": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/lib",
+  "command": "/usr/bin/c++ -DFFTW3F_THREADS -DGRLORA_DEBUG -DGR_CTRLPORT -DRADIUM_DEBUG -Dgnuradio_lora_EXPORTS -I/home/radium/Desktop/lora/gr-lora-parallel/lib/../include -g -fPIC   -fvisibility=hidden -Wall -Wextra -std=gnu++11 -o CMakeFiles/gnuradio-lora.dir/message_file_sink_impl.cc.o -c /home/radium/Desktop/lora/gr-lora-parallel/lib/message_file_sink_impl.cc",
+  "file": "/home/radium/Desktop/lora/gr-lora-parallel/lib/message_file_sink_impl.cc"
+},
+{
+  "directory": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/lib",
+  "command": "/usr/bin/c++ -DFFTW3F_THREADS -DGRLORA_DEBUG -DGR_CTRLPORT -DRADIUM_DEBUG -Dgnuradio_lora_EXPORTS -I/home/radium/Desktop/lora/gr-lora-parallel/lib/../include -g -fPIC   -fvisibility=hidden -Wall -Wextra -std=gnu++11 -o CMakeFiles/gnuradio-lora.dir/message_socket_sink_impl.cc.o -c /home/radium/Desktop/lora/gr-lora-parallel/lib/message_socket_sink_impl.cc",
+  "file": "/home/radium/Desktop/lora/gr-lora-parallel/lib/message_socket_sink_impl.cc"
+},
+{
+  "directory": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/lib",
+  "command": "/usr/bin/c++ -DFFTW3F_THREADS -DGRLORA_DEBUG -DGR_CTRLPORT -DRADIUM_DEBUG -Dgnuradio_lora_EXPORTS -I/home/radium/Desktop/lora/gr-lora-parallel/lib/../include -g -fPIC   -fvisibility=hidden -Wall -Wextra -std=gnu++11 -o CMakeFiles/gnuradio-lora.dir/channelizer_impl.cc.o -c /home/radium/Desktop/lora/gr-lora-parallel/lib/channelizer_impl.cc",
+  "file": "/home/radium/Desktop/lora/gr-lora-parallel/lib/channelizer_impl.cc"
+},
+{
+  "directory": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/lib",
+  "command": "/usr/bin/c++ -DFFTW3F_THREADS -DGRLORA_DEBUG -DGR_CTRLPORT -DRADIUM_DEBUG -Dgnuradio_lora_EXPORTS -I/home/radium/Desktop/lora/gr-lora-parallel/lib/../include -g -fPIC   -fvisibility=hidden -Wall -Wextra -std=gnu++11 -o CMakeFiles/gnuradio-lora.dir/controller_impl.cc.o -c /home/radium/Desktop/lora/gr-lora-parallel/lib/controller_impl.cc",
+  "file": "/home/radium/Desktop/lora/gr-lora-parallel/lib/controller_impl.cc"
+},
+{
+  "directory": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/lib",
+  "command": "/usr/bin/c++ -DFFTW3F_THREADS -DGRLORA_DEBUG -DGR_CTRLPORT -DRADIUM_DEBUG -Dgnuradio_lora_EXPORTS -I/home/radium/Desktop/lora/gr-lora-parallel/lib/../include -g -fPIC   -fvisibility=hidden -Wall -Wextra -std=gnu++11 -o CMakeFiles/gnuradio-lora.dir/debugger.cc.o -c /home/radium/Desktop/lora/gr-lora-parallel/lib/debugger.cc",
+  "file": "/home/radium/Desktop/lora/gr-lora-parallel/lib/debugger.cc"
+},
+{
+  "directory": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/lib",
+  "command": "/usr/bin/c++ -DFFTW3F_THREADS -DGRLORA_DEBUG -DGR_CTRLPORT -DRADIUM_DEBUG -Dgnuradio_lora_EXPORTS -I/home/radium/Desktop/lora/gr-lora-parallel/lib/../include -g -fPIC   -fvisibility=hidden -Wall -Wextra -std=gnu++11 -o CMakeFiles/gnuradio-lora.dir/message_socket_source_impl.cc.o -c /home/radium/Desktop/lora/gr-lora-parallel/lib/message_socket_source_impl.cc",
+  "file": "/home/radium/Desktop/lora/gr-lora-parallel/lib/message_socket_source_impl.cc"
+},
+{
+  "directory": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/swig",
+  "command": "/usr/bin/c++ -DGRLORA_DEBUG -DRADIUM_DEBUG  -g   -fvisibility=hidden -Wall -Wextra -std=gnu++11 -o CMakeFiles/_lora_swig_doc_tag.dir/_lora_swig_doc_tag.cpp.o -c /home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/swig/_lora_swig_doc_tag.cpp",
+  "file": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/swig/_lora_swig_doc_tag.cpp"
+},
+{
+  "directory": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/swig",
+  "command": "/usr/bin/c++ -DFFTW3F_THREADS -DGRLORA_DEBUG -DGR_CTRLPORT -DRADIUM_DEBUG -Dlora_swig_EXPORTS -I/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/swig -I/home/radium/Desktop/lora/gr-lora-parallel/swig -I/usr/include/gnuradio/swig -I/home/radium/Desktop/lora/gr-lora-parallel/lib/../include -isystem /usr/include/python3.6m -g -fPIC   -fvisibility=hidden -Wall -Wextra -std=gnu++11 -o CMakeFiles/lora_swig.dir/CMakeFiles/lora_swig.dir/lora_swigPYTHON_wrap.cxx.o -c /home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/swig/CMakeFiles/lora_swig.dir/lora_swigPYTHON_wrap.cxx",
+  "file": "/home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug/swig/CMakeFiles/lora_swig.dir/lora_swigPYTHON_wrap.cxx"
+}
+]

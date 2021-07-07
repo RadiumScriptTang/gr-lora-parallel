@@ -60,7 +60,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: 868e6
+    value: 868.1e6
   states:
     bus_sink: false
     bus_source: false
@@ -80,19 +80,19 @@ blocks:
       oversampling, and so on. Set higher decimation
 
       for better performance, but worse accuracy.'
-    value: '1'
+    value: '10'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [640, 76]
+    coordinate: [850, 69]
     rotation: 0
     state: enabled
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: 1e6
+    value: 1e7
   states:
     bus_sink: false
     bus_source: false
@@ -104,7 +104,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '11'
+    value: '7'
   states:
     bus_sink: false
     bus_source: false
@@ -133,7 +133,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [280, 76]
+    coordinate: [287, 101]
     rotation: 0
     state: enabled
 - name: lora_lora_receiver_0
@@ -155,13 +155,13 @@ blocks:
     maxoutbuf: '0'
     minoutbuf: '0'
     reduced_rate: 'False'
-    samp_rate: 1e6
+    samp_rate: samp_rate
     sf: sf
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 212]
+    coordinate: [515, 268]
     rotation: 0
     state: enabled
 - name: lora_message_socket_sink_0
@@ -177,7 +177,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [656, 244.0]
+    coordinate: [828, 332]
     rotation: 0
     state: enabled
 - name: osmosdr_source_0
@@ -536,7 +536,7 @@ blocks:
     bus_structure: null
     coordinate: [64, 180.0]
     rotation: 0
-    state: enabled
+    state: disabled
 - name: qtgui_freq_sink_x_0
   id: qtgui_freq_sink_x
   parameters:
@@ -555,7 +555,7 @@ blocks:
     autoscale: 'False'
     average: '1.0'
     axislabels: 'True'
-    bw: samp_rate
+    bw: 500e3
     color1: '"blue"'
     color10: '"dark blue"'
     color2: '"red"'
@@ -614,7 +614,36 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [392, 384.0]
+    coordinate: [472, 466]
+    rotation: 0
+    state: disabled
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    bw: samp_rate
+    comment: ''
+    fc: '0'
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: firdes.WIN_BLACKMAN_hARRIS
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [508, 674]
     rotation: 0
     state: true
 - name: uhd_usrp_source_0
@@ -654,7 +683,7 @@ blocks:
     ant7: ''
     ant8: ''
     ant9: ''
-    bw0: '0'
+    bw0: 500e3
     bw1: '0'
     bw10: '0'
     bw11: '0'
@@ -971,7 +1000,7 @@ blocks:
     show_lo_controls: 'False'
     stream_args: ''
     stream_chans: '[]'
-    sync: sync
+    sync: none
     time_source0: ''
     time_source1: ''
     time_source2: ''
@@ -985,16 +1014,17 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [64, 412.0]
+    coordinate: [110, 498]
     rotation: 0
-    state: disabled
+    state: enabled
 
 connections:
-- [lora_lora_receiver_0, frames, lora_message_socket_sink_0, in]
 - [osmosdr_source_0, '0', lora_lora_receiver_0, '0']
 - [osmosdr_source_0, '0', qtgui_freq_sink_x_0, '0']
+- [qtgui_sink_x_0, freq, lora_message_socket_sink_0, in]
 - [uhd_usrp_source_0, '0', lora_lora_receiver_0, '0']
 - [uhd_usrp_source_0, '0', qtgui_freq_sink_x_0, '0']
+- [uhd_usrp_source_0, '0', qtgui_sink_x_0, '0']
 
 metadata:
   file_format: 1

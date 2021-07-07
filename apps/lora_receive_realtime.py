@@ -6,7 +6,7 @@
 #
 # GNU Radio Python Flow Graph
 # Title: Lora Receive Realtime
-# GNU Radio version: 3.8.0.0
+# GNU Radio version: 3.8.2.0
 
 from distutils.version import StrictVersion
 
@@ -30,9 +30,10 @@ import signal
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
-import lora
-import osmosdr
+from gnuradio import uhd
 import time
+import lora
+
 from gnuradio import qtgui
 
 class lora_receive_realtime(gr.top_block, Qt.QWidget):
@@ -71,81 +72,61 @@ class lora_receive_realtime(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.sf = sf = 11
+        self.sf = sf = 7
         self.bw = bw = 125000
         self.target_freq = target_freq = 868.1e6
         self.symbols_per_sec = symbols_per_sec = float(bw) / (2**sf)
-        self.samp_rate = samp_rate = 1e6
-        self.decimation = decimation = 1
-        self.capture_freq = capture_freq = 868e6
+        self.samp_rate = samp_rate = 1e7
+        self.decimation = decimation = 10
+        self.capture_freq = capture_freq = 868.1e6
         self.bitrate = bitrate = sf * (1 / (2**sf / float(bw)))
 
         ##################################################
         # Blocks
         ##################################################
-        self.qtgui_freq_sink_x_0 = qtgui.freq_sink_c(
-            1024, #size
+        self.uhd_usrp_source_0 = uhd.usrp_source(
+            ",".join(("", "")),
+            uhd.stream_args(
+                cpu_format="fc32",
+                args='',
+                channels=list(range(0,1)),
+            ),
+        )
+        self.uhd_usrp_source_0.set_center_freq(capture_freq, 0)
+        self.uhd_usrp_source_0.set_gain(15, 0)
+        self.uhd_usrp_source_0.set_antenna('RX2', 0)
+        self.uhd_usrp_source_0.set_bandwidth(500e3, 0)
+        self.uhd_usrp_source_0.set_samp_rate(samp_rate)
+        # No synchronization enforced.
+        self.qtgui_sink_x_0 = qtgui.sink_c(
+            1024, #fftsize
             firdes.WIN_BLACKMAN_hARRIS, #wintype
-            capture_freq, #fc
+            0, #fc
             samp_rate, #bw
             "", #name
-            1
+            True, #plotfreq
+            True, #plotwaterfall
+            True, #plottime
+            True #plotconst
         )
-        self.qtgui_freq_sink_x_0.set_update_time(0.10)
-        self.qtgui_freq_sink_x_0.set_y_axis(-140, 10)
-        self.qtgui_freq_sink_x_0.set_y_label('Relative Gain', 'dB')
-        self.qtgui_freq_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, 0.0, 0, "")
-        self.qtgui_freq_sink_x_0.enable_autoscale(False)
-        self.qtgui_freq_sink_x_0.enable_grid(False)
-        self.qtgui_freq_sink_x_0.set_fft_average(1.0)
-        self.qtgui_freq_sink_x_0.enable_axis_labels(True)
-        self.qtgui_freq_sink_x_0.enable_control_panel(False)
+        self.qtgui_sink_x_0.set_update_time(1.0/10)
+        self._qtgui_sink_x_0_win = sip.wrapinstance(self.qtgui_sink_x_0.pyqwidget(), Qt.QWidget)
 
+        self.qtgui_sink_x_0.enable_rf_freq(False)
 
-
-        labels = ['', '', '', '', '',
-            '', '', '', '', '']
-        widths = [1, 1, 1, 1, 1,
-            1, 1, 1, 1, 1]
-        colors = ["blue", "red", "green", "black", "cyan",
-            "magenta", "yellow", "dark red", "dark green", "dark blue"]
-        alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
-            1.0, 1.0, 1.0, 1.0, 1.0]
-
-        for i in range(1):
-            if len(labels[i]) == 0:
-                self.qtgui_freq_sink_x_0.set_line_label(i, "Data {0}".format(i))
-            else:
-                self.qtgui_freq_sink_x_0.set_line_label(i, labels[i])
-            self.qtgui_freq_sink_x_0.set_line_width(i, widths[i])
-            self.qtgui_freq_sink_x_0.set_line_color(i, colors[i])
-            self.qtgui_freq_sink_x_0.set_line_alpha(i, alphas[i])
-
-        self._qtgui_freq_sink_x_0_win = sip.wrapinstance(self.qtgui_freq_sink_x_0.pyqwidget(), Qt.QWidget)
-        self.top_grid_layout.addWidget(self._qtgui_freq_sink_x_0_win)
-        self.osmosdr_source_0 = osmosdr.source(
-            args="numchan=" + str(1) + " " + ''
-        )
-        self.osmosdr_source_0.set_time_unknown_pps(osmosdr.time_spec_t())
-        self.osmosdr_source_0.set_sample_rate(samp_rate)
-        self.osmosdr_source_0.set_center_freq(capture_freq, 0)
-        self.osmosdr_source_0.set_freq_corr(0, 0)
-        self.osmosdr_source_0.set_gain(10, 0)
-        self.osmosdr_source_0.set_if_gain(20, 0)
-        self.osmosdr_source_0.set_bb_gain(20, 0)
-        self.osmosdr_source_0.set_antenna('', 0)
-        self.osmosdr_source_0.set_bandwidth(0, 0)
+        self.top_grid_layout.addWidget(self._qtgui_sink_x_0_win)
         self.lora_message_socket_sink_0 = lora.message_socket_sink('127.0.0.1', 40868, 0)
-        self.lora_lora_receiver_0 = lora.lora_receiver(1e6, capture_freq, [target_freq], bw, sf, False, 4, True, False, False, decimation, False, False)
+        self.lora_lora_receiver_0 = lora.lora_receiver(samp_rate, capture_freq, [target_freq], bw, sf, False, 4, True, False, False, decimation, False, False)
 
 
 
         ##################################################
         # Connections
         ##################################################
-        self.msg_connect((self.lora_lora_receiver_0, 'frames'), (self.lora_message_socket_sink_0, 'in'))
-        self.connect((self.osmosdr_source_0, 0), (self.lora_lora_receiver_0, 0))
-        self.connect((self.osmosdr_source_0, 0), (self.qtgui_freq_sink_x_0, 0))
+        self.msg_connect((self.qtgui_sink_x_0, 'freq'), (self.lora_message_socket_sink_0, 'in'))
+        self.connect((self.uhd_usrp_source_0, 0), (self.lora_lora_receiver_0, 0))
+        self.connect((self.uhd_usrp_source_0, 0), (self.qtgui_sink_x_0, 0))
+
 
     def closeEvent(self, event):
         self.settings = Qt.QSettings("GNU Radio", "lora_receive_realtime")
@@ -186,8 +167,8 @@ class lora_receive_realtime(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
-        self.osmosdr_source_0.set_sample_rate(self.samp_rate)
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.capture_freq, self.samp_rate)
+        self.uhd_usrp_source_0.set_samp_rate(self.samp_rate)
+        self.qtgui_sink_x_0.set_frequency_range(0, self.samp_rate)
 
     def get_decimation(self):
         return self.decimation
@@ -201,14 +182,15 @@ class lora_receive_realtime(gr.top_block, Qt.QWidget):
     def set_capture_freq(self, capture_freq):
         self.capture_freq = capture_freq
         self.lora_lora_receiver_0.set_center_freq(self.capture_freq)
-        self.osmosdr_source_0.set_center_freq(self.capture_freq, 0)
-        self.qtgui_freq_sink_x_0.set_frequency_range(self.capture_freq, self.samp_rate)
+        self.uhd_usrp_source_0.set_center_freq(self.capture_freq, 0)
 
     def get_bitrate(self):
         return self.bitrate
 
     def set_bitrate(self, bitrate):
         self.bitrate = bitrate
+
+
 
 
 
@@ -220,7 +202,9 @@ def main(top_block_cls=lora_receive_realtime, options=None):
     qapp = Qt.QApplication(sys.argv)
 
     tb = top_block_cls()
+
     tb.start()
+
     tb.show()
 
     def sig_handler(sig=None, frame=None):
@@ -236,9 +220,9 @@ def main(top_block_cls=lora_receive_realtime, options=None):
     def quitting():
         tb.stop()
         tb.wait()
+
     qapp.aboutToQuit.connect(quitting)
     qapp.exec_()
-
 
 if __name__ == '__main__':
     main()

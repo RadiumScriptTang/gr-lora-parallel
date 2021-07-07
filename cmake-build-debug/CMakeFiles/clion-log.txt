@@ -1,0 +1,73 @@
+/snap/clion/151/bin/cmake/linux/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /home/radium/Desktop/lora/gr-lora-parallel
+-- Enabling debug mode
+-- Enabling my debug log
+CMake Warning (dev) at /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
+  The package name passed to `find_package_handle_standard_args` (PkgConfig)
+  does not match the name of the calling package (GMP).  This can lead to
+  problems in calling code that expects `find_package` result variables
+  (e.g., `_FOUND`) to follow a certain pattern.
+Call Stack (most recent call first):
+  /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/FindPkgConfig.cmake:67 (find_package_handle_standard_args)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/FindGMP.cmake:1 (include)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/FindMPLIB.cmake:1 (find_package)
+  /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/GnuradioConfig.cmake:26 (find_dependency)
+  CMakeLists.txt:107 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Checking for module 'gmp'
+--   No package 'gmp' found
+CMake Warning (dev) at /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
+  The package name passed to `find_package_handle_standard_args` (PkgConfig)
+  does not match the name of the calling package (MPIR).  This can lead to
+  problems in calling code that expects `find_package` result variables
+  (e.g., `_FOUND`) to follow a certain pattern.
+Call Stack (most recent call first):
+  /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/FindPkgConfig.cmake:67 (find_package_handle_standard_args)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/FindMPIR.cmake:1 (include)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/FindMPLIB.cmake:2 (find_package)
+  /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/GnuradioConfig.cmake:26 (find_dependency)
+  CMakeLists.txt:107 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Checking for module 'mpir >= 3.0'
+--   No package 'mpir' found
+-- Could NOT find MPIR (missing: MPIRXX_LIBRARY MPIR_LIBRARY MPIR_INCLUDE_DIR) 
+CMake Warning (dev) at /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
+  The package name passed to `find_package_handle_standard_args` (VOLK) does
+  not match the name of the calling package (Volk).  This can lead to
+  problems in calling code that expects `find_package` result variables
+  (e.g., `_FOUND`) to follow a certain pattern.
+Call Stack (most recent call first):
+  /usr/lib/x86_64-linux-gnu/cmake/volk/VolkConfig.cmake:32 (find_package_handle_standard_args)
+  /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/GnuradioConfig.cmake:46 (find_dependency)
+  CMakeLists.txt:107 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- User set python executable /usr/bin/python3
+-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.6m.so (found suitable exact version "3.6.9") 
+CMake Warning (dev) at /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/FindPackageHandleStandardArgs.cmake:426 (message):
+  The package name passed to `find_package_handle_standard_args` (PkgConfig)
+  does not match the name of the calling package (FFTW3f).  This can lead to
+  problems in calling code that expects `find_package` result variables
+  (e.g., `_FOUND`) to follow a certain pattern.
+Call Stack (most recent call first):
+  /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/FindPkgConfig.cmake:67 (find_package_handle_standard_args)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/FindFFTW3f.cmake:6 (INCLUDE)
+  /snap/clion/151/bin/cmake/linux/share/cmake-3.19/Modules/CMakeFindDependencyMacro.cmake:47 (find_package)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/gnuradio-fftConfig.cmake:24 (find_dependency)
+  /usr/lib/x86_64-linux-gnu/cmake/gnuradio/GnuradioConfig.cmake:116 (include)
+  CMakeLists.txt:107 (find_package)
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- Extracting version information from git describe...
+-- No C++ unit tests... skipping
+-- 
+-- Checking for module SWIG
+-- Found SWIG version 3.0.12.
+-- Found PythonLibs: /usr/lib/x86_64-linux-gnu/libpython3.6m.so (found version "3.6.9") 
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/radium/Desktop/lora/gr-lora-parallel/cmake-build-debug
